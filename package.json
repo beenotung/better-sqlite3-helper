@@ -1,12 +1,15 @@
 {
-  "name": "better-sqlite3-helper",
-  "version": "3.1.6",
+  "name": "@beenotung/better-sqlite3-helper",
+  "version": "4.0.0",
   "description": "A wrapper library that eases the work with better-sqlite3 with some new functions and a migration-system",
   "main": "src/database.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test ./node_modules/mocha/bin/_mocha --ui bdd --recursive ./test"
   },
   "author": "Markus Madeja",
+  "maintainers": [
+    "Beeno Tung <aabbcc1241@yahoo.com.hk>"
+  ],
   "repository": "Kauto/better-sqlite3-helper",
   "homepage": "http://intergenies.com/programs/nodejs/better-sqlite3-helper",
   "license": "MIT",
