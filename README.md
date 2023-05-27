@@ -1,4 +1,4 @@
-# better-sqlite3-helper
+# @beenotung/better-sqlite3-helper
 
 A nodejs wrapper library for the work with [better-sqlite3](https://www.npmjs.com/package/better-sqlite3/) ("The fastest and simplest library for SQLite3 in Node.js"). It's intended for simple server-apps for nodejs and offer some new functions and a migration-system.
 
@@ -15,7 +15,7 @@ All commands of better-sqlite3 Version 5 (like [function](https://github.com/Jos
 Install it for example with
 
 ```bash
-npm i better-sqlite3-helper
+npm i @beenotung/better-sqlite3-helper
 ```
 
 ## How to use
@@ -23,7 +23,7 @@ npm i better-sqlite3-helper
 In every file you want access to a sqlite3 database simply require the library and use it right away.
 ##### anyServerFile.js
 ```js
-const DB = require('better-sqlite3-helper');
+const DB = require('@beenotung/better-sqlite3-helper')
 
 let row = DB().queryFirstRow('SELECT * FROM users WHERE id=?', userId);
 console.log(row.firstName, row.lastName, row.email);
@@ -53,7 +53,7 @@ The database loads lazy. Only when it's used for the first time, the database is
 If you want to change the default-values, you can do this by calling the library once in the beginning of your server-code and thus setting it up:
 ##### index.js
 ```js
-const DB = require('better-sqlite3-helper');
+const DB = require('@beenotung/better-sqlite3-helper')
 
 // The first call creates the global instance with your settings
 DB({
@@ -72,7 +72,7 @@ DB({
 After that you can use the library without parameter:
 ##### anotherAPIFile.js
 ```js
-const DB = require('better-sqlite3-helper');
+const DB = require('@beenotung/better-sqlite3-helper')
 
 // a second call directly returns the global instance
 let row = DB().queryFirstRow('SELECT * FROM users WHERE id=?', userId);
@@ -181,7 +181,7 @@ If you want to put invalid values into the database, the functions will throw an
 ```js
 const { Router } = require('express')
 const bodyParser = require('body-parser')
-const DB = require('better-sqlite3-helper')
+const DB = require('@beenotung/better-sqlite3-helper')
 
 router.patch('/user/:id', bodyParser.json(), function (req, res, next) {
   try {
@@ -246,7 +246,7 @@ The files need to be numbered. They are automatically executed before the first 
 You can also give an array of changes.
 
 ```js
-const DB = require('better-sqlite3-helper')
+const DB = require('@beenotung/better-sqlite3-helper')
 
 const db = new DB({
   migrate: {
@@ -283,4 +283,4 @@ const db = new DB({
 
 ## License
 
-[MIT](https://github.com/Kauto/better-sqlite3-helper/blob/master/LICENSE)
+[MIT](https://github.com/beenotung/better-sqlite3-helper/blob/master/LICENSE)
