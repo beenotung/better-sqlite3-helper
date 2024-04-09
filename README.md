@@ -9,6 +9,7 @@ This package is forked from [better-sqlite3-helper](https://github.com/Kauto/bet
 - breaking: [better-sqlite3](https://www.npmjs.com/package/better-sqlite3/) Version 9 is now used.
 - feat: `@types/better-sqlite3` is added as optional and peer dependencies
 - feat: auto setup synchronous pragma when establish connection to database
+- patch: fix type signature for creating new instance of DB
 - chore: no longer depends on `mkdirp`, using the built-in version from `fs` instead
 
 ## New in Version 3.0
