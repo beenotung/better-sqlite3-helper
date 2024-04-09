@@ -31,13 +31,16 @@ function DB (options = {}) {
     instance = instance || new DB(...arguments)
     return instance
   }
+  let WAL = options.WAL || true
+  let synchronous = WAL ? 'NORMAL' : 'FULL'
   this.options = Object.assign(
     {
       path: dbFile,
       migrate: true,
       readonly: false,
       fileMustExist: false,
-      WAL: true
+      WAL,
+      synchronous,
     },
     options
   )
@@ -98,6 +101,7 @@ DB.prototype.connection = function () {
   if (this.options.WAL) {
     this.db.pragma('journal_mode = WAL')
   }
+  this.db.pragma('synchronous = ' + this.options.synchronous)
   if (this.options.migrate) {
     this.migrate(
       typeof this.options.migrate === 'object' ? this.options.migrate : {}
