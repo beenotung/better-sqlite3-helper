@@ -302,3 +302,7 @@ declare namespace BetterSqlite3Helper {
 export default function DB(
   options?: BetterSqlite3Helper.DBOptions
 ): BetterSqlite3Helper.DBInstance;
+
+export default class DB {
+  constructor(options?: BetterSqlite3Helper.DBOptions)
+}
