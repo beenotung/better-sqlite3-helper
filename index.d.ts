@@ -22,6 +22,8 @@ declare namespace BetterSqlite3Helper {
     fileMustExist?: boolean;
     /** Whether to automatically enable 'PRAGMA journal_mode = WAL'. Default: true */
     WAL?: boolean;
+    /** Automatically enable 'PRAGMA synchronous = ?'. Default: 'NORMAL' for WAL, 'FULL' for non-WAL */
+    synchronous?: 0 | 'OFF' | 1 | 'NORMAL' | 2 | 'FULL' | 3 | 'EXTRA';
     /** Migration options. Disable completely by setting `migrate: false` */
     migrate?: MigrationOptions | false;
   };
