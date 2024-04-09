@@ -10,8 +10,14 @@
   "maintainers": [
     "Beeno Tung <aabbcc1241@yahoo.com.hk>"
   ],
-  "repository": "Kauto/better-sqlite3-helper",
-  "homepage": "http://intergenies.com/programs/nodejs/better-sqlite3-helper",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/better-sqlite3-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beenotung/better-sqlite3-helper/issues"
+  },
+  "homepage": "https://github.com/beenotung/better-sqlite3-helper#readme",
   "license": "MIT",
   "keywords": [
     "sqlite3",
