@@ -2,8 +2,15 @@
 
 A nodejs wrapper library for the work with [better-sqlite3](https://www.npmjs.com/package/better-sqlite3/) ("The fastest and simplest library for SQLite3 in Node.js"). It's intended for simple server-apps for nodejs and offer some new functions and a migration-system.
 
-<a href='https://ko-fi.com/kautode' target='_blank'><img height='35' style='border:0px;height:46px;' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+This package is forked from [better-sqlite3-helper](https://github.com/Kauto/better-sqlite3-helper) by [Kauto](https://github.com/Kauto). Most changes were back-ported but some [pull requests](https://github.com/Kauto/better-sqlite3-helper/pulls) are still pending.
   
+## New in Version 4.x
+- breaking: forked into `@beenotung/better-sqlite3-helper` for npm release
+- breaking: [better-sqlite3](https://www.npmjs.com/package/better-sqlite3/) Version 9 is now used.
+- feat: `@types/better-sqlite3` is added as optional and peer dependencies
+- feat: auto setup synchronous pragma when establish connection to database
+- chore: no longer depends on `mkdirp`, using the built-in version from `fs` instead
+
 ## New in Version 3.0
 [better-sqlite3](https://www.npmjs.com/package/better-sqlite3/) Version 7 is now used. This means that the option "memory" is removed (use path `:memory:` instead - worked in version 2 too) and support for Node.js versions < 10 is dropped. For older node versions you can continue using version 2 of this library.
 
