@@ -1,5 +1,6 @@
 # dependencies
 node_modules
+.pnpmfile.cjs
 
 # logs
 npm-debug.log
