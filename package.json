@@ -28,7 +28,7 @@
     "mkdirp": "^3.0.1"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.8",
+    "@types/better-sqlite3": "^7.6.10",
     "chai": "^4.3.10",
     "cross-env": "^7.0.3",
     "eslint": "^8.55.0",

@@ -61,7 +61,7 @@ declare namespace BetterSqlite3Helper {
 
     connection(): BetterSqlite3.Database;
 
-    prepare(sql: string): BetterSqlite3.Statement;
+    prepare<BindParameters extends unknown[] | {} = unknown[], Result = unknown>(sql: string): BetterSqlite3.Statement<BindParameters, Result>;
 
     transaction<F extends VariableArgFunction>(fn: F): Transaction<F>;
 
