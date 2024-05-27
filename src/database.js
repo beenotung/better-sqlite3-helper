@@ -33,7 +33,7 @@ function DB (options = {}) {
   }
   this.options = Object.assign(
     {
-      path: dbFile,
+      path: options.memory ? ':memory:' : dbFile,
       migrate: true,
       readonly: false,
       fileMustExist: false,
