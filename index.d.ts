@@ -47,11 +47,11 @@ declare namespace BetterSqlite3Helper {
     : never;
 
   interface Transaction<F extends VariableArgFunction> {
-    (...params: ArgumentTypes<F>): any;
-    default(...params: ArgumentTypes<F>): any;
-    deferred(...params: ArgumentTypes<F>): any;
-    immediate(...params: ArgumentTypes<F>): any;
-    exclusive(...params: ArgumentTypes<F>): any;
+    (...params: ArgumentTypes<F>): ReturnType<F>;
+    default(...params: ArgumentTypes<F>): ReturnType<F>;
+    deferred(...params: ArgumentTypes<F>): ReturnType<F>;
+    immediate(...params: ArgumentTypes<F>): ReturnType<F>;
+    exclusive(...params: ArgumentTypes<F>): ReturnType<F>;
   }
 
   interface DBInstance {
