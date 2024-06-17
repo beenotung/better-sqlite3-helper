@@ -24,11 +24,11 @@
     "better-sqlite3"
   ],
   "dependencies": {
-    "better-sqlite3": "^9.2.0",
+    "better-sqlite3": "^11.0.0",
     "mkdirp": "^3.0.1"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.8",
+    "@types/better-sqlite3": "^7.6.10",
     "chai": "^4.3.10",
     "cross-env": "^7.0.3",
     "eslint": "^8.55.0",
