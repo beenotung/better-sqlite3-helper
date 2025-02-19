@@ -53,5 +53,10 @@
   },
   "optionalDependencies": {
     "app-root-path": "^3.1.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
   }
 }
