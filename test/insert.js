@@ -1,5 +1,5 @@
 const { describe, it, afterEach } = require('mocha')
-const { expect } = require('chai')
+const { expect, assert } = require('chai')
 const DB = require('../src/database')
 const fs = require('fs')
 const path = require('path')
@@ -115,5 +115,44 @@ describe('Database Insert', function () {
       value: 'new value',
       type: 0
     })).to.be.equal(4)
+  })
+
+  it('will reject tables with spaces', function () {
+    db = new DB({
+      migrate: {
+        migrationsPath: './test/migrations'
+      }
+    })
+    const fn = () => db.insert('Has Spaces', {
+        key: 'test2',
+        value: '12349',
+        type: 0
+      })
+    assert.throws(fn, Error, "alphanumeric")
+  })
+
+  it('will reject fields with spaces', function () {
+    db = new DB({
+      migrate: {
+        migrationsPath: './test/migrations'
+      }
+    })
+    const newRow = {}
+    newRow['has spaces'] = '12349'
+    const fn = () => db.insert('Setting', newRow)
+    assert.throws(fn, Error, "alphanumeric")
+  })
+
+  it('will accept values with spaces', function () {
+    db = new DB({
+      migrate: {
+        migrationsPath: './test/migrations'
+      }
+    })
+    expect(db.insert('Setting', {
+      key: 'test2',
+      value: 'val with spaces',
+      type: 0
+    })).to.be.equal(3)
   })
 })

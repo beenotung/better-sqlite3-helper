@@ -100,7 +100,7 @@ DB.prototype.connection = function () {
   if (this.options.WAL) {
     this.db.pragma('journal_mode = WAL')
   }
-  this.db.pragma('synchronous = ' + this.options.synchronous)
+  this.db.pragma('synchronous = ' + checkInput(this.options.synchronous))
   if (this.options.migrate) {
     this.migrate(
       typeof this.options.migrate === 'object' ? this.options.migrate : {}
@@ -386,7 +386,7 @@ DB.prototype.update = function (table, data, where, whiteList) {
   }
 
   // Build start of where query
-  let sql = `UPDATE \`${table}\` SET `
+  let sql = `UPDATE \`${checkInput(table)}\` SET `
   let parameter = []
 
   // Build data part of the query
@@ -396,7 +396,7 @@ DB.prototype.update = function (table, data, where, whiteList) {
     // don't set undefined and only values in an optional whitelist
     if (value !== undefined && (!whiteList || whiteList.includes(keyOfData))) {
       parameter.push(value)
-      setStringBuilder.push(`\`${keyOfData}\` = ?`)
+      setStringBuilder.push(`\`${checkInput(keyOfData)}\` = ?`)
     }
   }
   if (!setStringBuilder.length) {
@@ -417,7 +417,7 @@ DB.prototype.update = function (table, data, where, whiteList) {
       const value = where[keyOfWhere]
       if (value !== undefined) {
         parameter.push(value)
-        whereStringBuilder.push(`\`${keyOfWhere}\` = ?`)
+        whereStringBuilder.push(`\`${checkInput(keyOfWhere)}\` = ?`)
       }
     }
     if (!whereStringBuilder.length) {
@@ -528,7 +528,7 @@ DB.prototype.delete = function (table, where) {
   }
 
   // Build start of where query
-  let sql = `DELETE FROM \`${table}\` WHERE `
+  let sql = `DELETE FROM \`${checkInput(table)}\` WHERE `
   let parameter = []
 
   // Build where part of query
@@ -542,7 +542,7 @@ DB.prototype.delete = function (table, where) {
       const value = where[keyOfWhere]
       if (value !== undefined) {
         parameter.push(value)
-        whereStringBuilder.push(`\`${keyOfWhere}\` = ?`)
+        whereStringBuilder.push(`\`${checkInput(keyOfWhere)}\` = ?`)
       }
     }
     if (!whereStringBuilder.length) {
@@ -569,7 +569,7 @@ function createWhiteListByBlackList (table, blackList) {
   let whiteList
   if (Array.isArray(blackList)) {
     // get all avaible columns
-    whiteList = this.queryColumn('name', `PRAGMA table_info('${table}')`)
+    whiteList = this.queryColumn('name', `PRAGMA table_info('${checkInput(table)}')`)
     // get only those not in the whiteBlackList
     whiteList = whiteList.filter(v => !blackList.includes(v))
   }
@@ -610,7 +610,8 @@ function createInsertOrReplaceStatement (
   }
 
   // Build start of where query
-  let sql = `${insertOrReplace} INTO \`${table}\` (\`${fields.join(
+  fields = fields.map(v => checkInput(v))
+  let sql = `${checkInput(insertOrReplace)} INTO \`${checkInput(table)}\` (\`${fields.join(
     '`,`'
   )}\`) VALUES `
   const parameter = []
@@ -686,7 +687,7 @@ DB.prototype.migrate = function ({
   })
 
   // Create a database table for migrations meta data if it doesn't exist
-  this.exec(`CREATE TABLE IF NOT EXISTS "${table}" (
+  this.exec(`CREATE TABLE IF NOT EXISTS "${checkInput(table)}" (
   id   INTEGER PRIMARY KEY,
   name TEXT    NOT NULL,
   up   TEXT    NOT NULL,
@@ -695,7 +696,7 @@ DB.prototype.migrate = function ({
 
   // Get the list of already applied migrations
   let dbMigrations = this.query(
-    `SELECT id, name, up, down FROM "${table}" ORDER BY id ASC`
+    `SELECT id, name, up, down FROM "${checkInput(table)}" ORDER BY id ASC`
   )
 
   // Undo migrations that exist only in the database but not in files,
@@ -711,7 +712,7 @@ DB.prototype.migrate = function ({
       this.exec('BEGIN')
       try {
         this.exec(isForceLastMigration ? lastMigration.down : migration.down)
-        this.run(`DELETE FROM "${table}" WHERE id = ?`, migration.id)
+        this.run(`DELETE FROM "${checkInput(table)}" WHERE id = ?`, migration.id)
         this.exec('COMMIT')
         dbMigrations = dbMigrations.filter(x => x.id !== migration.id)
       } catch (err) {
@@ -733,7 +734,7 @@ DB.prototype.migrate = function ({
       try {
         this.exec(migration.up)
         this.run(
-          `INSERT INTO "${table}" (id, name, up, down) VALUES (?, ?, ?, ?)`,
+          `INSERT INTO "${checkInput(table)}" (id, name, up, down) VALUES (?, ?, ?, ?)`,
           migration.id,
           migration.name,
           migration.up,
@@ -748,6 +749,16 @@ DB.prototype.migrate = function ({
   }
 
   return this
+}
+
+const checkInput = (s) => {
+  s = s.toString()
+  const alphanumeric = /^[a-zA-Z0-9_-]+$/
+  if (!alphanumeric.test(s)) {
+    throw new Error(`Input must be alphanumeric or - or _: ${s}`)
+  }
+  
+  return s
 }
 
 module.exports = DB
