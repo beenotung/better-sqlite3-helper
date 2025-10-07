@@ -1,5 +1,7 @@
 # @beenotung/better-sqlite3-helper
 
+[![npm Package Version](https://img.shields.io/npm/v/@beenotung/better-sqlite3-helper)](https://www.npmjs.com/package/@beenotung/better-sqlite3-helper)
+
 A nodejs wrapper library for the work with [better-sqlite3](https://www.npmjs.com/package/better-sqlite3/) ("The fastest and simplest library for SQLite3 in Node.js"). It's intended for simple server-apps for nodejs and offer some new functions and a migration-system.
 
 This package is forked from [better-sqlite3-helper](https://github.com/Kauto/better-sqlite3-helper) by [Kauto](https://github.com/Kauto). Most changes were back-ported but some [pull requests](https://github.com/Kauto/better-sqlite3-helper/pulls) are still pending.
