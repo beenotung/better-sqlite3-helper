@@ -30,18 +30,19 @@
     "better-sqlite3"
   ],
   "dependencies": {
-    "better-sqlite3": "^12.4.1"
+    "better-sqlite3": "^12.6.2"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
-    "chai": "^6.2.0",
+    "app-root-path": "^3.1.0",
+    "chai": "^6.2.2",
     "cross-env": "^10.1.0",
     "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.6.0",
-    "mocha": "^11.7.4"
+    "mocha": "^11.7.5"
   },
   "peerDependencies": {
     "@types/better-sqlite3": "^7.6.3"
@@ -50,9 +51,6 @@
     "@types/better-sqlite3": {
       "optional": true
     }
-  },
-  "optionalDependencies": {
-    "app-root-path": "^3.1.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
