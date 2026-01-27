@@ -45,7 +45,7 @@
     "mocha": "^11.7.5"
   },
   "peerDependencies": {
-    "@types/better-sqlite3": "^7.6.3"
+    "@types/better-sqlite3": "^7.6.13"
   },
   "peerDependenciesMeta": {
     "@types/better-sqlite3": {
